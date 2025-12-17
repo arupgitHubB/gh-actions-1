@@ -1,0 +1,13 @@
+name: Generate ASCII Framework using shell script
+on: push
+jobs:
+    generate_ascii:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repo
+            uses: actions/checkout@v6
+
+          - name: Run Shell script
+            run: |
+              chmod +x ascii-script.sh      # for execution permission
+              ./ascii-script.sh             # We need to give the path of the script
