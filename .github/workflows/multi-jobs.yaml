@@ -1,0 +1,53 @@
+name: Generate ASCII Framework
+on: push
+jobs:
+    build_job:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout repo
+            uses: actions/checkout@v6
+
+          - name: Install cowsay program
+            run: sudo apt-get install cowsay -y
+
+          - name: Execute cowsay CMD
+            run: cowsay -f dragon "Run for cover, I am a DRAGON.. RAWR" >> dragon.txt
+
+          - name: Upload the dragon text file
+            uses: actions/upload-artifact@v4
+            with:
+                name: dragon-text-file
+                path: dragon.txt
+            
+          - name: List files
+            run: ls -ltra
+
+    test_job:
+        needs: build_job                                                    # To run the jobs in sequence
+        runs-on: ubuntu-latest
+        steps:
+          - name: Download the text file from the previous job
+            uses: actions/download-artifact@v5
+            with:
+                name: dragon-text-file
+
+          - name: Test file exists
+            run: grep -i "dragon" dragon.txt
+
+    deploy_job:
+        needs: test_job
+        runs-on: ubuntu-latest
+        steps:
+          - name: Download the text file from the previous job
+            uses: actions/download-artifact@v5
+            with:
+                name: dragon-text-file
+
+          - name: Deploy message
+            run: echo "Deploying..."
+
+          - name: Read file
+            run: cat dragon.txt
+            
+          - name: List files
+            run: ls -ltra
