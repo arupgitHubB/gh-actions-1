@@ -1,4 +1,4 @@
-name: Generate ASCII Framework
+name: Multi-job workflow for ASCII framework
 on: push
 jobs:
     build_job:
