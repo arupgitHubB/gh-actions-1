@@ -21,9 +21,6 @@ on: [push]
 
 jobs:
   build:
-    concurrency:
-      group: production-app
-      cancel-in-progress: true
     strategy:
       fail-fast: false
       max-parallel: 2
