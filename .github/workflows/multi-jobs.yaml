@@ -1,5 +1,5 @@
 name: Multi-job workflow for ASCII framework
-on: push
+on: [push, workflow_dispatch]
 jobs:
     build_job:
         runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
             run: grep -i "dragon" dragon.txt
 
     deploy_job:
-        needs: test_job
+        needs: [test_job, build_job]
         runs-on: ubuntu-latest
         steps:
           - name: Download the text file from the previous job
