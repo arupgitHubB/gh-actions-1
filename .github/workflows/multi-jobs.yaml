@@ -23,7 +23,7 @@ jobs:
             run: ls -ltra
 
     test_job:
-        needs: build_job                                                    # To run the jobs in sequence
+        # needs: build_job                                                    # To run the jobs in sequence
         runs-on: ubuntu-latest
         steps:
           - name: Download the text file from the previous job
