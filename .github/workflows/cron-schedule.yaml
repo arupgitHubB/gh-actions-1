@@ -1,0 +1,11 @@
+name: cron scheduled job
+on:
+  workflow_dispatch: 
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: prints time
+        run: echo "The time is $(date)"
